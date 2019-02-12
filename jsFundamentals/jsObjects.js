@@ -34,8 +34,8 @@ function getWorkerInfo(obj) {
         arr = obj[key]
         console.log(key)
         for (let i = 0; i < arr.length; i++) {
-            let len = (arr[i].first_name + arr[i].last_name).length
-            console.log(`1 - ${arr[i].last_name}, ${arr[i].first_name} - ${len}`)
+            let length = (arr[i].first_name + arr[i].last_name).length
+            console.log(`${i + 1} - ${arr[i].last_name}, ${arr[i].first_name} - ${length}`)
         }
     }
 }

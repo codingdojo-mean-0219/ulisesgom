@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+<title>Hunt</title>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1>Trivia!</h1>
+        <div class="row" id="row1">
+            
+        </div>
+        
+
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $.get("https://opentdb.com/api.php?amount=10&category=27&type=multiple", displayTrivia)
+
+        function displayTrivia(data) {
+            console.log(data);
+            let count = data.results.length;
+            while(count > 0) {
+                for (var question of data.results) {
+                    let answers = question.incorrect_answers.slice();
+                    answers.push(question.correct_answer);
+                    answers.sort(function(a, b){return 0.5 - Math.random()});
+                    $('.row').append(function() {
+                        let triviaQuestions = `<div class='col-4'>
+                        <h2> ${question.category} </h2>
+                        <p> ${question.question} </p>`
+                        for(let answer of answers) {
+                            triviaQuestions += `<p><input type='radio'> ${answer} </input></p>`
+                        }
+                        triviaQuestions += `</div>`
+                        return triviaQuestions
+                    });
+                    count-- 
+                }
+                
+            }
+        }
+    })
+    
+
+    
+</script>
+</body>
+</html>

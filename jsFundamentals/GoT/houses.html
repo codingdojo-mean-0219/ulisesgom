@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Houses</title>
+</head>
+<body>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="houses/stark.jpg" class="w-100 h-100 " id='362' alt="House Stark Banner">
+            </div>
+            <div class="col-md-3">
+                <img src="houses/targaryen.jpg" class="w-100 h-100 " id='378' alt="House Targaryen Banner">
+            </div>
+            <div class="col-md-3">
+                <img src="houses/lannister.jpg" class="w-100 h-100 " id='229' alt="House Lannister Banner">
+            </div>
+            <div class="col-md-3">
+                <img src="houses/baratheon.png" class="w-100 h-100 " id='17' alt="House BAratheon Banner">
+            </div>
+        </div>
+        <div id='house-display' class=" mt-5 mx-auto w-50 hidden">
+
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    $('img').on('click', function() {
+        let houseId = $(this).attr('id');
+        $.getJSON("https://anapioficeandfire.com/api/houses/" + houseId, displayHouse)
+    });
+
+    function displayHouse(data) {
+        $('#house-display').addClass('jumbotron').html(function(){
+            let houseInfo = `<h2><span class="text-secondary">Name:</span> ${data.name}</h2><h2><span class="text-secondary">Words:</span> ${data.words} </h2><h2 class="mt-3"><span class="text-secondary">Titles:</span> `;
+            for (let title of data.titles) {
+                houseInfo += `${title}, `
+            }
+            houseInfo += `</h2>`
+            return houseInfo
+        });
+
+    };
+</script>
+</body>
+</html>

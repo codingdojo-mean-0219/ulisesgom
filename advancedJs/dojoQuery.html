@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>dojoQuery</title>
+    </head>
+<body>
+    <h1 id="first">Hello All</h1>
+
+<script>
+    function $dojo(id) {
+        this.myId = document.getElementById(id);
+
+        this.click = function (callback) {
+            this.myId.addEventListener('click',callback);
+        }
+        this.hover = function(hoverIn, hoverOut) {
+            this.myId.addEventListener('mouseover',hoverIn);
+            this.myId.addEventListener('mouseout',hoverOut);
+        }
+        return this;
+    }
+    $dojo('first').click(() => console.log('clicked'));
+    $dojo('first').hover(() => console.log('in'), () => console.log('out'))
+    
+</script>
+</body>
+</html>

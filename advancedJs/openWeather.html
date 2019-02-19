@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <title>Open Weather</title>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome! Enter your city</h1>
+        <input type="text" class="form-control d-inline-block w-25" placeholder="Your City">
+        <button class="btn btn-primary">FIND</button>
+    </div>
+    <div id='display-info' class="container">
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script>
+    if(localStorage.getItem('firstTime')) {
+        $('h1').html("<h1> You've done this already. You know what to do </h1>");
+        $('#display-info').html(`<div class="jumbotron text-center"><h2>${localStorage.getItem('city')}</h2><h2 class="text-danger">${localStorage.getItem('weather')}&#176;F</h2></div>`);
+    }
+    $('.btn').on("click", function() {
+        if($('input').val() === '') {
+            $('#display-info').html("<h2 class='text-warning'>Must enter a City</h2>")
+        }
+        else {
+            if($('input').val().split(' ').length > 1) {
+                var city = $('input').val().split(' ').join('+');
+            }
+            else {
+                var city = $('input').val()
+            }
+
+            let fullUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city +"&units=imperial&appid=142891102fb8781ce46de4a2dc7f4be9";
+
+            $.getJSON(fullUrl).done(function(data){
+                let temperature = Math.round(data.main.temp);
+                if(localStorage.length === 0) {
+                    localStorage.setItem('firstTime',"False")
+                }
+                if(localStorage.getItem('firstTime')) {
+                    $('h1').html("<h1> You've done this already. You know what to do </h1>")
+                }
+                localStorage.setItem('city',data.name);
+                localStorage.setItem('weather',temperature);
+
+                $('#display-info').html(`<div class="jumbotron text-center"><h2>${data.name}</h2><h2 class="text-danger">${temperature}&#176;F</h2></div>`);
+            }).fail(function(){
+                $('#display-info').html("<h2 class='text-warning'>Must enter a valid City</h2>")
+            })
+                
+        }
+        
+    });
+</script>
+
+</body>
+</html>

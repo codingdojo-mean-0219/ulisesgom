@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Details</title>
+</head>
+<body>
+    <h1>Detail page for <%= cat.name %></h1>
+    <h2>Favorite Color: <%= cat.favorite_color %></h2>
+    <h2>Favorite Places to sleep:</h2>
+    <ul>
+        <% for (place of cat.sleeping) { %>
+        <li><%= place %></li>
+        <% } %>
+    </ul>
+
+</body>
+</html>

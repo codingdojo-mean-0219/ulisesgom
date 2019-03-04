@@ -13,28 +13,45 @@
     <div class="container">
         <div class="row">
             <div class="col text-right">
-                <button href="/people" id="people" class="btn btn-danger d-inline-block ml-auto">People</button>
+                <button data-url='/people' class="links btn btn-danger d-inline-block ml-auto">People</button>
             </div>
             <div class="col">
-                <button href="/planets" id="planets" class="btn btn-danger">Planets</button>
+                <button data-url='/planets' class="links btn btn-danger">Planets</button>
             </div>
         </div>
         <hr class="my-4">
-        <div id='display-info'class="container bg-light"></div>
+        
+        <div id='display-info'class="container pt-3 bg-light"></div>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
 <script>
-    $('#people').click(function(){
-        $.getJSON('/people',data => {
-            console.log(data);
+    const htmlLinks = `<div class="row"><p data-url='/prev' class='text-primary ml-3'> Previous</p> <p data-url='/all' class="text-primary mx-auto"> All People</p> <p data-url='/next' class="text-primary mr-3 mb-3">Next</p></div>`;
+
+    $('button.links').click(function(e){
+        const currentUrl = e.target.dataset.url;
+        $.getJSON(currentUrl, data => {
+            let htmlString = ``;
             data.results.forEach(el => {
-                $('#display-info').append(`<p>${el}</p>`)
-            })
-            
-        })
+                htmlString += `<p>${el.name}</p>`
+            });
+            htmlString += htmlLinks
+            $('#display-info').html(htmlString);
+        });
+    });
+    $('#display-info').on('click','p',function(ele) {
+        const currentUrl = ele.target.dataset.url;
+        $.getJSON(currentUrl, data => {
+            let htmlString = ``;
+            data.results.forEach(el => {
+                htmlString += `<p>${el.name}</p>`
+            });
+            htmlString += htmlLinks
+            $('#display-info').html(htmlString);
+        });
     })
+    
 </script>
 </body>
 </html>

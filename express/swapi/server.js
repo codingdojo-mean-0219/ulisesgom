@@ -37,6 +37,18 @@ app.get('/next', (req,res) => {
 app.get('/prev', (req,res) => {
     axiosSwapi(req,res,req.session.prevPage);
 });
+app.get('/all', (req,res) => {
+    console.log('inall')
+    axios.get(req.session.nextPage).then(data => {
+        req.session.nextPage = data.data.next;
+        req.session.prevPage = data.data.previous;
+        res.json(data.data);
+    }).catch(err => {
+        console.log(data.err);
+        res.json(data.err);
+    });
+    
+});
 
 function axiosSwapi(request, response, url) {
     axios.get(url).then(data => {

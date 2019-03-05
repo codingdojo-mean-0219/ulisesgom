@@ -27,7 +27,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
 <script>
-    const htmlLinks = `<div class="row"><p data-url='/prev' class='text-primary ml-3'> Previous</p> <p data-url='/all' class="text-primary mx-auto"> All People</p> <p data-url='/next' class="text-primary mr-3 mb-3">Next</p></div>`;
+    const htmlLinks = `<div id="page-links" class="row"><p data-url='/prev' class='text-primary ml-3'> Previous</p> <p data-url='/all' class="text-primary mx-auto"> All</p> <p data-url='/next' class="text-primary mr-3 mb-3">Next</p></div>`;
 
     $('button.links').click(function(e){
         const currentUrl = e.target.dataset.url;
@@ -42,7 +42,23 @@
     });
     $('#display-info').on('click','p',function(ele) {
         const currentUrl = ele.target.dataset.url;
-        $.getJSON(currentUrl, data => {
+        if (currentUrl === '/all') {
+            $.getJSON(currentUrl, data => {
+                $('#page-links').slideUp(1000);
+                let htmlString = ``;
+                data.results.forEach(el => {
+                    htmlString += `<p>${el.name}</p>`
+                });
+                $('#display-info').append(htmlString);
+            });
+            return
+        }
+        console.log('passed if')
+        displayInfo(currentUrl);
+    })
+
+    function displayInfo (url) {
+        $.getJSON(url, data => {
             let htmlString = ``;
             data.results.forEach(el => {
                 htmlString += `<p>${el.name}</p>`
@@ -50,8 +66,7 @@
             htmlString += htmlLinks
             $('#display-info').html(htmlString);
         });
-    })
-    
+    }
 </script>
 </body>
 </html>

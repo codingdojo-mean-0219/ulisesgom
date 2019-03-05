@@ -27,7 +27,6 @@ app.get('/people', (req,res) => {
 
 app.get('/planets', (req,res) => {
     req.session.nextPage = 'https://swapi.co/api/planets';
-    console.log('here')
     axiosSwapi(req,res,req.session.nextPage);
 });
 
@@ -38,15 +37,26 @@ app.get('/prev', (req,res) => {
     axiosSwapi(req,res,req.session.prevPage);
 });
 app.get('/all', (req,res) => {
-    console.log('inall')
-    axios.get(req.session.nextPage).then(data => {
-        req.session.nextPage = data.data.next;
-        req.session.prevPage = data.data.previous;
-        res.json(data.data);
-    }).catch(err => {
-        console.log(data.err);
-        res.json(data.err);
-    });
+    console.log('top of all', req.session.nextPage)
+    function recursionCall () {
+        if(req.session.nextPage === null) {
+            return
+        }
+        axios.get(req.session.nextPage).then(data => {
+            req.session.nextPage = data.data.next;
+            req.session.prevPage = data.data.previous;
+            
+            for(let obj of data.data.results) {
+                console.log(obj.name);
+            }
+            recursionCall();
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    };
+    recursionCall();
+    
     
 });
 
@@ -56,8 +66,8 @@ function axiosSwapi(request, response, url) {
         request.session.prevPage = data.data.previous;
         response.json(data.data);
     }).catch(err => {
-        console.log(data.err);
-        response.json(data.err);
+        console.log(err);
+        response.json(err);
     });
 }
 

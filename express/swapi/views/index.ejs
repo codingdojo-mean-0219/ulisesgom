@@ -42,23 +42,33 @@
     });
     $('#display-info').on('click','p',function(ele) {
         const currentUrl = ele.target.dataset.url;
+        // console.log(typeof currentUrl)
         if (currentUrl === '/all') {
-            $.getJSON(currentUrl, data => {
-                $('#page-links').slideUp(1000);
-                let htmlString = ``;
-                data.results.forEach(el => {
-                    htmlString += `<p>${el.name}</p>`
-                });
-                $('#display-info').append(htmlString);
-            });
-            return
+            console.log('here')
+            displayAll(currentUrl);
+            return;
         }
         console.log('passed if')
         displayInfo(currentUrl);
     })
-
+    function displayAll (url) {
+        $('#page-links').slideUp(400);
+        $.getJSON(url, data => {
+            console.log('in all')
+            let htmlString = ``;
+            data.results.forEach(el => {
+                htmlString += `<p>${el.name}</p>`
+            });
+            $('#display-info').append(htmlString);
+            if(data.next !== null) {
+                displayAll(url);
+            }
+            return;
+        });
+    }
     function displayInfo (url) {
         $.getJSON(url, data => {
+            console.log('in html')
             let htmlString = ``;
             data.results.forEach(el => {
                 htmlString += `<p>${el.name}</p>`

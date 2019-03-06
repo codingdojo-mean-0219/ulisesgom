@@ -37,27 +37,8 @@ app.get('/prev', (req,res) => {
     axiosSwapi(req,res,req.session.prevPage);
 });
 app.get('/all', (req,res) => {
-    console.log('top of all', req.session.nextPage)
-    function recursionCall () {
-        if(req.session.nextPage === null) {
-            return
-        }
-        axios.get(req.session.nextPage).then(data => {
-            req.session.nextPage = data.data.next;
-            req.session.prevPage = data.data.previous;
-            
-            for(let obj of data.data.results) {
-                console.log(obj.name);
-            }
-            recursionCall();
-        }).catch(err => {
-            console.log(err);
-            res.json(err);
-        });
-    };
-    recursionCall();
-    
-    
+    console.log(req.session.nextPage,"top")
+    axiosSwapi(req,res,req.session.nextPage);
 });
 
 function axiosSwapi(request, response, url) {

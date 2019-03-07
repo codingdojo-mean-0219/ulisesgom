@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Form</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <div id="message" class="bg-light"></div>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input id="name" name="name" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <select name="location" id="location">
+                        <option value="online">Online</option>
+                        <option value="burbank">Burbank</option>
+                        <option value="Seattle">Seattle</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="language">language:</label>
+                    <select name="language" id="language">
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="c#">C#</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment (optional):</label>
+                    <textarea name="comment" id="comment" class="form-control w-50 h-25"></textarea>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            var socket = io(); //1
+    
+            socket.on('greet', function (data) { //4
+                console.log(data.msg); //5
+                socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
+            });
+            socket.on('updated_message', function(data) {
+                $('#message').html(`<p>${data.msg}</p>`);
+            })
+            socket.on('random_number', data => {
+                console.log(data.number)
+                $('#message').append(`<p>Your random number is: ${data.number}</p>`);
+            })
+        
+            $('form').submit(e => {
+                e.preventDefault();
+                const inputs = $('form input, form select, form textarea');
+                let values = {};
+                inputs.each(function(){ 
+                    values[this.name] = this.value;
+                });
+                socket.emit('submit', values);
+            })
+         })
+    </script>
+</body>
+</html>

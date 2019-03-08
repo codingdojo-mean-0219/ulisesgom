@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+    
+    <title>Counter</title>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron mt-5 text-center">
+            <h1>Counter:</h1>
+            <h2 id="show-count">  </h2>
+            <button id='add' class="btn btn-lg btn-warning">ADD</a>
+            <button id='clear' class="btn btn-lg btn-danger">Clear</a>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+
+        $(document).ready(function (){
+            var socket = io();
+            socket.on('response', data => {
+                console.log(data.num);
+                $('#show-count').html(data.num)
+            })
+            socket.on('connected', function (data) {
+                $('#show-count').html(data.num)
+            });
+            $('#add').on('click', function(e) {
+                socket.emit('add', {num: 1});
+            });
+            $('#clear').on('click', function(e) {
+                socket.emit('clear', {num: 0});
+            });
+        });
+    </script>
+</body>
+</html>

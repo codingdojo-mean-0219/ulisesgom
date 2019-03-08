@@ -14,8 +14,6 @@ io.on('connection', socket => {
     socket.on('submit', data => {
         let randomNumber = Math.round(Math.random() * 1000)
         let dataString = JSON.stringify(data);
-        console.log(randomNumber)
-        console.log(dataString)
         socket.emit('updated_message', {msg: `You emitted the following: ${dataString}`});
         socket.emit('random_number', {number: randomNumber});
     })

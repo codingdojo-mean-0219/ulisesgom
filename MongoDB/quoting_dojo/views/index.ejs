@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Form</title>
+</head>
+<body>
+    <div class="container">
+        <!-- <%- JSON.stringify(messages) %>  -->
+        <!-- based on the structure of your messages, determine how to display them -->
+        <% if(messages.registration) { %>
+            <% for (var x of messages.registration) { %>
+            <h3><%= x %></h3>
+            <% } %>
+        <% } %>
+        <form action="/quotes" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input id="name" class="form-control" name="name" type="text">
+            </div>
+            <div class="form-group">
+                <label for="quote">Quote</label>
+                <textarea name="quote" id="" class="w-75 h-25"></textarea>
+            </div>
+            <button type="submit">Submit</button> <a href="/quotes" class="ml-4 btn btn-warning">Quotes</a>
+        </form>
+        
+        
+    </div>
+</body>
+</html>

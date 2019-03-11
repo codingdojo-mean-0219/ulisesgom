@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Form</title>
+</head>
+<body>
+    <div class="container">
+        <!-- <%- JSON.stringify(messages) %>  -->
+        <!-- based on the structure of your messages, determine how to display them -->
+        <% if(messages.registration) { %>
+            <% for (var x of messages.registration) { %>
+            <h3><%= x %></h3>
+            <% } %>
+        <% } %>
+        <form action="/owls" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input id="name" class="form-control" name="name" type="text">
+            </div>
+            <div class="form-group">
+                <label for="wisdom">Wisdom</label>
+                <input id="wisdom" class="form-control" name="wisdom" type="number">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input id="age" class="form-control" name="age" type="number">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        
+        
+    </div>
+</body>
+</html>

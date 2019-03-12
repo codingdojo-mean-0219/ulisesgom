@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Message Board</title>
+</head>
+<body>
+    <h1>The Dojo Message Board</h1>
+    <hr>
+    <div class="container">
+            <% if(messages.registration) { %>
+                <% for (var x of messages.registration) { %>
+                <h5 class="text-danger"><%= x %></h3>
+                <% } %>
+            <% } %>
+        <form action="/message" method="post">
+            <div class="form-group">
+                <label for="author">Author Name:</label>
+                <input id="author" class="form-control" name="author" type="text">
+            </div>
+            <div class="form-group">
+                <label for="content">Message:</label>
+                <textarea name="content" id="content" class="form-control w-75 h-25"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <hr class="mt-4">
+        <% for(let message of messages) { %>
+            <h4><span class="text-secondary">Name:</span> <%= message.author %> </h4>
+            <h4><span class="text-secondary">Message:</span> <%= message.content %> </h4>
+            <div class="px-5 container">
+                <% if(message.comments.length > 0) { %>
+                    <% for(let comment of message.comments) { %>
+                        <h5 class="mt-4"><span class="text-secondary">Name:</span> <%= comment.author %> </h5>
+                        <h5><span class="text-secondary">Comment:</span> <%= comment.content %> </h5>
+                    <% } %>    
+                <% } %>
+                <form action="/comment/<%= message._id %>" method="post">
+                    <div class="form-group">
+                        <label for="author">Author Name:</label>
+                        <input id="author" class="form-control" name="author" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Comment:</label>
+                        <textarea name="content" id="content" class="form-control w-75 h-25"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

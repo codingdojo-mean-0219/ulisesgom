@@ -4,14 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const flash = require('express-flash');
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/my_first_database');
-const QuoteSchema = new mongoose.Schema({
-    name: {type: String, required: true, minlength: 3},
-    quote: {type: String, required: true, minlength: 5}
-}, {timestamps: true });
-mongoose.model('Quote', QuoteSchema); // We are setting this Schema in our Models as 'Quote'
+const model = require('./server/models/quote')(); // We are setting this Schema in our Models as 'Quote'
 // const Quote = mongoose.model('Quote');
 
 app.use(session({

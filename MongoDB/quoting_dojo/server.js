@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const flash = require('express-flash');
-const model = require('./server/models/quote')(); // We are setting this Schema in our Models as 'Quote'
+const model = require('./server/config/mongoose')(); // We are setting this Schema in our Models as 'Quote'
 // const Quote = mongoose.model('Quote');
 
 app.use(session({

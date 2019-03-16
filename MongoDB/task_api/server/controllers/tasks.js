@@ -18,11 +18,14 @@ module.exports = {
         console.log(req.body)
         Task.create(req.body)
         .then(doc => {
-            res.json({newDoc: doc});
+            res.redirect('/tasks');
         })
         .catch(err => {
             res.json({error: err});
         })
+    },
+    newForm: function(req,res) {
+        res.render('new');
     },
     show: function(req,res) {
         Task.findOne({_id: req.params.task_id})
@@ -45,7 +48,7 @@ module.exports = {
         })
     },
     update: function (req,res) {
-        Task.findByIdAndUpdate(req.params.task_id)
+        Task.findByIdAndUpdate(req.params.task_id,{$set: req.body})
         .then(doc => {
             res.json({msg: "update succesfull", doc: doc})
         })

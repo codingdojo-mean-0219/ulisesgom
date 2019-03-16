@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/task/update/" method="post">
+        <form action="/task/<%= doc._id %>" method="POST">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input id="title" class="form-control" name="title" type="text" value="<%= doc.title %>">
@@ -24,6 +24,7 @@
                 <input type="radio" class="" name="completed" id="true" value="true">
                 <label for="false">False</label>
                 <input type="radio" class="" name="completed" id="false" value="false" checked>
+                <button type="submit">Submit</button>
             </div>
         </form>
     </div>

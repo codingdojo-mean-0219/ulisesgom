@@ -7,11 +7,10 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
   constructor(private _http: HttpClient) {
-    this.getAuthors();
   };
   getAuthors() {
-    let tempObserve = this._http.get('/authors')
-    tempObserve.subscribe(data => console.log(data));
+    return this._http.get('/authors')
+    // tempObserve.subscribe(data => console.log(data));
   };
 
 };

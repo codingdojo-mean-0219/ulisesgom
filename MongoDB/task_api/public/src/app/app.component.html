@@ -1,20 +1,24 @@
-
-<h1>Task api</h1>
-<h2>All the Tasks:</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Completed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let task of allTasks">
-      <td>{{task.title}}</td>
-      <td>{{task.complete}}</td>
-    </tr>
-  </tbody>
-</table>
-<h2>One Task:</h2>
-
-<h4>Name:{{oneTask.title}}, completed: {{oneTask.complete}}</h4>
+<div class="container text-center">
+  <h1>Task api</h1>
+  <h2>All the Tasks:</h2>
+  <button *ngIf="!allTasks" class="btn btn-danger" (click)="getTasksFromService()">Get All</button>
+  
+  <table *ngIf="allTasks" class="table table-light table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Completed</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of allTasks">
+        <td>{{task.title}}</td>
+        <td>{{task.complete}}</td>
+        <td><button (click)="getOneTaskFromService(task._id)" class="btn btn-sm btn-warning">Info</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 *ngIf="oneTask">One Task:</h2>
+  <h4 *ngIf="oneTask"><span class="text-secondary">Name:</span>  {{oneTask.title}}, <span class="text-secondary">completed:</span>  {{oneTask.complete}}</h4>
+</div>

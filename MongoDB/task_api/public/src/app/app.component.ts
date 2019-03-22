@@ -13,8 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private _httpService: HttpService){}
 
   ngOnInit() {
-    this.getTasksFromService();
-    this.getOneTaskFromService();
+
   }
   getTasksFromService() {
     let observable = this._httpService.getTasks();
@@ -23,8 +22,8 @@ export class AppComponent implements OnInit {
       this.allTasks = data['docs'];
     })
   };
-  getOneTaskFromService() {
-    let observable = this._httpService.getTaskById('5c8d62017a8b9c2b8c762c08');
+  getOneTaskFromService(task_id:string) {
+    let observable = this._httpService.getTaskById(task_id);
     observable.subscribe(data => {
       console.log('single', data);
       this.oneTask = data['doc'];

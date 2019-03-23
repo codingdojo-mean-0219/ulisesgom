@@ -1,0 +1,45 @@
+<div *ngIf="!name" >
+    <label for="newPlayer">New Player Name:</label>
+    <input #inputName type="text" name='input-name' placeholder="Press Enter When finished" (keyup.enter)="createUser(inputName.value)">
+
+    <label for="returnPlayer">Returning Player Name:</label>
+    <input #inputName type="text" name='input-name' placeholder="Press Enter When finished" (keyup.enter)="returnUser(inputName.value)">
+
+</div>
+
+
+
+<div *ngIf="name" class="container-fluid ml-5">
+    <p class="h1">Hello, {{ name }}</p>
+    <p class="h1">You have {{ gold }} gold!</p>
+    <hr mx-4>
+    <div class="row text-center">
+        <div class="col">
+            <p class="h3">Farm</p>
+            <p class="h5">Earns 2-5 Gold</p>
+            <button class="btn btn-warning" (click)="processGold('farm',name)">Farm!</button>
+        </div>
+        <div class="col">
+            <p class="h3">Cave</p>
+            <p class="h5">Earns 5-10 Gold</p>
+            <button class="btn btn-warning" (click)="processGold('cave')">Cave!</button>
+        </div>
+        <div class="col">
+            <p class="h3">House</p>
+            <p class="h5">Earns 7-15 Gold</p>
+            <button class="btn btn-warning" (click)="processGold('house')">House!</button>
+        </div>
+        <div class="col">
+            <p class="h3">Casino</p>
+            <p class="h5">Earn or lose up to 100 Gold</p>
+            <button class="btn btn-warning" (click)="processGold('casino')">Casino!</button>
+        </div>
+    </div>
+    <hr mx-4>
+    <div *ngIf="log" class="w-75 h-50 pre-scrollable">
+        <p class="h4">Adventure Log:</p>
+        <hr class="w-25">
+        <p *ngFor="let message of log"> {{ message }}</p>
+    </div>
+</div>
+

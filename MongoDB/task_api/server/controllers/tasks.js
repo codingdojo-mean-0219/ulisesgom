@@ -7,7 +7,7 @@ module.exports = {
     },
     delete: function(req,res) {
         Task.findOneAndRemove({_id: req.params.task_id})
-        .then(success=>{ 
+        .then(result => { 
             res.json({success: "doc was deleted"})
         })
         .catch(err => {
@@ -18,14 +18,11 @@ module.exports = {
         console.log(req.body)
         Task.create(req.body)
         .then(doc => {
-            res.redirect('/tasks');
+            res.json({doc});
         })
         .catch(err => {
             res.json({error: err});
         })
-    },
-    newForm: function(req,res) {
-        res.render('new');
     },
     show: function(req,res) {
         Task.findOne({_id: req.params.task_id})
@@ -48,6 +45,7 @@ module.exports = {
         })
     },
     update: function (req,res) {
+        
         Task.findByIdAndUpdate(req.params.task_id,{$set: req.body})
         .then(doc => {
             res.json({msg: "update succesfull", doc: doc})
@@ -55,14 +53,5 @@ module.exports = {
         .catch(err=> {
             res.json({error: err})
         })
-    },
-    updateForm: function(req,res) {
-        Task.findById(req.params.task_id)
-        .then(doc => {
-            res.render('update', {doc})
-        })
-        .catch(err => {
-            res.json({error: err})
-        });
     }
 }

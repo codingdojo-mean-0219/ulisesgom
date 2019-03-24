@@ -34,21 +34,5 @@
       </div>
     </div>
   </div>
-  <div class="jumbotron" *ngIf="oneCake">
-    <div class="row">
-      <div class="col">
-        <h3>Baked by {{oneCake.name}}</h3>
-        <img [src]="oneCake.cakeUrl" class="img-thumbnail" alt="delicious cake">
-      </div>
-      <div class="col">
-       
-        <p>Average Rating: {{oneCake.averageRating}} </p>
-        <div *ngFor="let rating of oneCake.rating">
-          <p class="mb-1">{{ rating.comment }}</p>
-          <p>{{ rating.score }} Stars</p>
-          <hr class="mr-5">
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-cake *ngIf="oneCake" [showCake]="oneCake"></app-cake>
 </div>  <!-- container -->

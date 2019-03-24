@@ -1,3 +1,17 @@
-<p>
-  cake works!
-</p>
+<div class="jumbotron" >
+  <div class="row">
+    <div class="col">
+      <h3>Baked by {{showCake.name}}</h3>
+      <img [src]="showCake.cakeUrl" class="img-thumbnail" alt="delicious cake">
+    </div>
+    <div class="col">
+      
+      <p>Average Rating: {{showCake.averageRating}} </p>
+      <div *ngFor="let rating of showCake.rating">
+        <p class="mb-1">{{ rating.comment }}</p>
+        <p>{{ rating.score }} Stars</p>
+        <hr class="mr-5">
+      </div>
+    </div>
+  </div>
+</div>

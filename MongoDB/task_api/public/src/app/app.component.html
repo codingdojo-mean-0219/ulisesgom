@@ -2,6 +2,8 @@
   <h1>Task api</h1>
   <h2>All the Tasks:</h2>
 
+  <app-task *ngIf="oneTask" [showTask]="oneTask"></app-task>
+
   <table *ngIf="allTasks" class="table table-light table-striped">
     <thead>
       <tr>

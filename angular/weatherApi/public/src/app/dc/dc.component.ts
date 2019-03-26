@@ -12,6 +12,6 @@ export class DcComponent implements OnInit {
   constructor(private appComp: AppComponent) { }
 
   ngOnInit() {
-    this.appComp.getWeatherFromService(this, 'dc');
+    this.appComp.getWeatherFromService(this, 'district of columbia');
   }
 }

@@ -13,6 +13,7 @@ export class AppComponent {
   getWeatherFromService(self: object ,city: string,) {
     let observable = this._httpService.getWeather(city);
     observable.subscribe(data => {
+      console.log(data)
       self['city'] = data['name']
       self['humidity'] = data['main']['humidity'];
       self['averageTemp'] = data['main']['temp'];

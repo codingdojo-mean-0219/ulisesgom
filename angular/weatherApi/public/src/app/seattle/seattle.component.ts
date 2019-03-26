@@ -7,10 +7,13 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./seattle.component.css']
 })
 export class SeattleComponent implements OnInit {
+  city;
+  worked;
 
   constructor(private appComp: AppComponent) { }
 
   ngOnInit() {
+    this.appComp.getWeatherFromService(this, 'seattle');
   }
 
 }

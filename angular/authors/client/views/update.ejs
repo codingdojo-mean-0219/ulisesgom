@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Edit</title>
+</head>
+<body>
+    <div class="container">
+        <% if(messages.author) { %>
+            <% for (var x of messages.author) { %>
+                <h5 class="text-danger"><%= x %></h3>
+            <% } %>
+        <% } %>
+        <form action="/authors/<%= doc._id %>" method="POST">
+            <div class="form-group">
+                <label for="name">name</label>
+                <input id="name" class="form-control" name="name" type="text" value="<%= doc.name %>">
+            </div>
+            <div class="form-group">
+                <label for="quote">quote</label>
+                <textarea id="quote" name="quote" class="form-control" type="text"><%= doc.quote %></textarea>
+            </div>   
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

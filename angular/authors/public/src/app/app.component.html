@@ -1,0 +1,49 @@
+<div class="container text-center">
+  <h1>Favorite Authors</h1>
+  <a href="/authors/new">New Author</a>
+  <table class="table table-light table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quote</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of allAuthors">
+        <td>{{author.name}}</td>
+        <td>{{author.quote}}</td>
+        <td>
+          <a href="/authors/{{author._id}}" class="btn btn-sm mr-2 btn-warning">Edit</a>
+          <button (click)="deleteAuthor(author._id)" class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <div class="row">
+    <div class="col">
+      
+    </div>
+    <div  *ngIf="oneTask" class="col">
+      <h2>Edit Task</h2>
+      <form class="text-left" (submit)="onSubmitUpdate()">
+        <label for="oneTask.title">Title</label>
+        <input type="text" class="form-control" name="oneTask.title" [(ngModel)]="oneTask.title">
+
+        <label for="oneTask.description">Description</label>
+        <input type="text" class="form-control" name="oneTask.description" [(ngModel)]="oneTask.description">
+        <div class="form-group">
+          <label class="h6">Completed: </label>
+          <label for="complete">True</label>
+          <input type="radio" name="complete" [(ngModel)]="oneTask.complete" value="true" id="">
+          <label  class="ml-3" for="complete">False</label> 
+          <input type="radio" name="complete" [(ngModel)]="oneTask.complete" value="false" id="" checked>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Update</button>
+      </form>
+    </div>
+  </div> -->
+
+</div>

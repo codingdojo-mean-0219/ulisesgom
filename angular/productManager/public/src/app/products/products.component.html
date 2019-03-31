@@ -1,0 +1,9 @@
+<div class="row">
+    <router-outlet></router-outlet>
+    <div *ngFor="let product of allProducts" class="col">
+        <h2>{{ product.name }}</h2>
+        <h2> {{ product.price | currency }}</h2>
+        <button [routerLink]="[product._id]" class="btn btn-warning">Edit</button>
+        <button (click)="deleteProduct(product._id)" class="btn btn-danger"> Delete</button>
+    </div>
+</div>

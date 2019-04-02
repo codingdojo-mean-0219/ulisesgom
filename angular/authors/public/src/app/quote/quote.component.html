@@ -1,0 +1,13 @@
+<h2>Add Quote</h2>
+<a routerLink="/">Home</a>
+<p *ngIf="!author">loading..</p>
+<div *ngIf="author">
+  <p>Provide a quote for {{author.name}}:</p>
+  <p>{{newQuote | json}}</p>
+  <form (submit)="addQuote($event)">
+    <label for="quote">Quote</label>
+    <input type="text" class="form-control" [(ngModel)]="newQuote.quotes.quote" name="newQuote.quotes.quote" name="quotes">
+
+    <button class="btn btn-primary" type="submit">Create</button>
+  </form>
+</div>

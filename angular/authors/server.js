@@ -13,12 +13,12 @@ app.use(session({
     cookie: { maxAge: 60000 }
 }));
 app.use(flash());
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static( __dirname + '/public/dist/public' ));
 
-app.set('views', path.join(__dirname, './client/views'));
-app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, './client/views'));
+// app.set('view engine', 'ejs');
 
 const routes = require('./server/config/routes')(app);
 

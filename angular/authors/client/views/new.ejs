@@ -9,18 +9,18 @@
 </head>
 <body>
     <div class="container">
-        <h2>Create New Task</h2>
-        <% if(messages.author) { %>
-          <% for (var x of messages.author) { %>
-           <h5 class="text-danger"><%= x %></h3>
-          <% } %>
+      <h2>Create New Task</h2>
+      <% if(messages.author) { %>
+        <% for (var x of messages.author) { %>
+          <h5 class="text-danger"><%= x %></h3>
+        <% } %>
       <% } %>
       <form action="/authors/new" method="POST">
         <label for="name">Name</label>
         <input type="text" class="form-control" name="name">
 
         <label for="quote">Quote</label>
-        <input type="text" class="form-control" name="quote">
+        <input type="text" class="form-control" name="quotes">
 
         <button class="btn btn-primary" type="submit">Create</button>
       </form>

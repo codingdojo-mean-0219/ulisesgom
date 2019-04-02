@@ -1,0 +1,18 @@
+<a [routerLink]="['new']">New Author</a>
+<table class="table table-light table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of allAuthors">
+      <td>{{author.name}}</td>
+      <td>
+        <a [routerLink]="['/','author',author._id]" class="btn btn-sm mr-2 btn-warning">Show Quotes</a>
+        <button (click)="deleteAuthor(author._id)" class="btn btn-sm btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

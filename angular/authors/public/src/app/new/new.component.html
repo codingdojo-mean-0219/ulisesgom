@@ -1,0 +1,18 @@
+
+<h2>Create New Task</h2>
+<!-- <% if(messages.author) { %>
+  <% for (var x of messages.author) { %>
+    <h5 class="text-danger"><%= x %></h3>
+  <% } %>
+<% } %> -->
+<a routerLink="/">Home</a>
+<form (submit)="createAuthor($event)">
+  <label for="name">Name</label>
+  <input type="text" class="form-control" [(ngModel)]="newAuthor.name" name="newAuthor.name" name="name">
+
+  <!-- <label for="quote">Quote</label>
+  <input type="text" class="form-control" [(ngModel)]="newAuthor.quotes" name="newAuthor.quotes" name="quotes"> -->
+
+  <button class="btn btn-primary" type="submit">Create</button>
+</form>
+

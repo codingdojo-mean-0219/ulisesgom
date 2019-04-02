@@ -2,8 +2,21 @@ const mongoose = require('mongoose');
 const Author = mongoose.model('Author');
 mongoose.options.useFindAndModify = false;
 module.exports = {
-    index: function(req,res) {
-        res.render('index');
+    addQuote: function(req,res) {
+        Author.findByIdAndUpdate(req.params.author_id, {$push: req.body}, {runValidators:true})
+        .then(doc => {
+            console.log(doc);
+            res.json({doc})
+        })
+        .catch(err => {
+            console.log(err)
+            let msg = [];
+            for(var key in err.errors){
+                msg.push(err.errors[key].message);
+            }
+            // redirect the user to an appropriate route
+            res.json({message: msg})
+        })
     },
     delete: function(req,res) {
         Author.findOneAndRemove({_id: req.params.author_id})
@@ -14,28 +27,36 @@ module.exports = {
             res.json({error: err})
         })
     },
+    deleteQuote: function (req,res) {
+        console.log('here')
+        Author.findByIdAndUpdate(req.params.author_id, {$pull: {quotes: {_id: req.params.quote_id}}})
+        .then(result=> {
+            res.json({success: 'quote was removed'})
+        })
+        .catch(err=> {res.json({err})})
+    },
     new: function(req,res) {
         console.log(req.body)
         Author.create(req.body)
         .then(doc => {
-            res.redirect('/');
+            console.log(doc)
+            res.json({doc});
         })
         .catch(err => {
+            console.log(err)
+            let msg = [];
             for(var key in err.errors){
-                req.flash('author', err.errors[key].message);
+                msg.push(err.errors[key].message);
             }
             // redirect the user to an appropriate route
-            res.redirect('/authors/new');
+            res.json({message: msg})
         })
-    },
-    newForm: function (req,res) {
-        res.render('new');
     },
     show: function(req,res) {
         Author.findOne({_id: req.params.author_id})
         .then(doc=>{
             
-            res.render('update', {doc});
+            res.json({doc});
         })
         .catch(err => {
             res.json({error: err});
@@ -52,19 +73,4 @@ module.exports = {
             res.json({error: err});
         })
     },
-    update: function (req,res) {
-        
-        Author.findByIdAndUpdate(req.params.author_id,{$set: req.body}, {runValidators: true}, (err, doc) => {
-            if(err) {
-                for(var key in err.errors){
-                req.flash('author', err.errors[key].message);
-                }
-                // redirect the user to an appropriate route
-                res.redirect('/authors/'+ req.params.author_id );
-            } else {
-                res.redirect('/');
-
-            }
-        })
-    }
 }

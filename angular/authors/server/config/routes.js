@@ -21,13 +21,16 @@ module.exports = function(app) {
     });
     app.get('/author/:author_id/:quote_id', (req,res) => {
         authors.deleteQuote(req,res);
+    });
+    app.put('/author/:author_id', (req,res) => {
+        authors.updateVote(req,res);
     })
     app.put('/quote/:author_id', (req,res) => {
         authors.addQuote(req,res);
     });
-    app.post('/authors/:author_id', (req,res) => {
-        authors.addQuote(req,res);
-    });
+    // app.post('/authors/:author_id', (req,res) => {
+    //     authors.addQuote(req,res);
+    // });
     app.all("*", (req,res,next) => {
         res.sendFile(path.resolve("./public/dist/public/index.html"))
     })

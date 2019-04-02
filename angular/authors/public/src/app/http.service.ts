@@ -27,10 +27,10 @@ export class HttpService {
   };
   addQuote(author_id: string, quote: object) {
     return this._http.put('quote/' + author_id, quote);
-  }
-  voteUp(author_id: string, author) {
-    
-  }
+  };
+  upVoteQuote(author_id: string, author: object) {
+    return this._http.put('author/'+author_id,author);
+  };
   updateAuthor(author: object) {
     return this._http.put('/authors/'+ author['_id'],author);
   };

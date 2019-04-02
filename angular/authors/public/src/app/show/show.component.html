@@ -2,7 +2,7 @@
 <h3 *ngIf="!author">Loading..</h3>
 <div *ngIf="author">
   <a routerLink="/">Home</a>
-  <a [routerLink]="['/','quote', author._id]">Add a quote</a>
+  <a [routerLink]="['/','quote', author._id]" class="ml-4">Add a quote</a>
   
   <p>Quotes by {{author.name}}: </p>
   <table class="table table-light table-striped">
@@ -18,8 +18,8 @@
         <td>{{quote.quote}}</td>
         <td>{{quote.votes}}</td>
         <td>
-          <button class="btn btn-success" (click)="voteUp(author._id)">vote up</button>
-          <button class="btn btn-warning">vote down</button>
+          <button class="btn btn-success" (click)="vote(quote._id, 'up')">vote up</button>
+          <button class="btn btn-warning" (click)="vote(quote._id, 'down')">vote down</button>
           <button class="btn btn-danger" (click)="deleteQuote(quote._id)">delete</button>
         </td>
       </tr>

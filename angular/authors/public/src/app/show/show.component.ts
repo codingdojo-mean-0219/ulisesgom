@@ -18,7 +18,6 @@ export class ShowComponent implements OnInit {
     this.getAuthor(param);
   }
   deleteQuote(quote_id: string) {
-    console.log('in comp');
     this.http.deleteQuote(this.author._id, quote_id)
     .subscribe(doc => {
       console.log(doc);
@@ -31,9 +30,21 @@ export class ShowComponent implements OnInit {
       console.log(data['doc'])
     });
   }
-  voteUp() {
-    this.author
-    this.http.voteUp
-  }
+  vote(quote_id: string, message:string) {
+    let vote = this.author.quotes.find(obj => obj._id == quote_id);
+    if(message === 'up') {
+      vote.votes += 1;
+    };
+    if(message === 'down') {
+      vote.votes -= 1;
+    }
+    this.http.upVoteQuote(this.author._id, this.author)
+    .subscribe(doc => {
+      console.log(doc);
+      this.getAuthor(this.author._id);
+    });
+  };
+
+
 
 }

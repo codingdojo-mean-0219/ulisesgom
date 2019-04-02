@@ -73,4 +73,13 @@ module.exports = {
             res.json({error: err});
         })
     },
+    updateVote: function (req,res) {
+        console.log(req.body.quotes);
+        Author.findByIdAndUpdate(req.params.author_id,{$set: {quotes: req.body.quotes}},{new:true})
+        .then(doc => {
+            console.log(doc);
+            res.json({msg: 'doc updated'})
+        })
+        .catch(err => res.json({err}));
+    }
 }

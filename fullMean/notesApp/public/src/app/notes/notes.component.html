@@ -1,0 +1,10 @@
+<div class="pre-scrollable h-75">
+  <div class="container">
+    <div class="row" *ngFor="let note of notes">
+      <div class="col p-4">
+        <p class="text-right">Noted on: {{note.createdAt | date: 'medium'}}</p>
+        <p>{{note.note}}</p>
+      </div>
+    </div>
+  </div>
+</div>

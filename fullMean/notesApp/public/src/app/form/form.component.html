@@ -1,0 +1,8 @@
+<form (submit)="onSubmit($event)">
+  <div class="form-group">
+    <label for="note">Note</label>
+    <input id="note" class="form-control" [(ngModel)]="newNote.note" name="newNote.note" type="text">
+  </div>
+  <button type="submit" class="btn btn-danger">Add</button>
+</form>
+

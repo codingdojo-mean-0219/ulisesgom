@@ -21,11 +21,13 @@ export class PlayerListComponent implements OnInit {
   };
 
   deletePlayer(player_id: string) {
-    this.http.deletePlayer(player_id)
-    .subscribe(data=> {
-      console.log(data);
-      this.getPlayers();
-    })
-  }
+    if(confirm('Are you sure you wish to remove this player?')) {
+      this.http.deletePlayer(player_id)
+      .subscribe(data=> {
+        console.log(data);
+        this.getPlayers();
+      })
+    } else {return}    
+  };
 
 }

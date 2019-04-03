@@ -1,0 +1,13 @@
+<app-player-nav></app-player-nav>
+
+<form (submit)="createPlayer($event)">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" class="form-control" [(ngModel)]="newPlayer.name" name="newPlayer.name" type="text">
+  </div>
+  <div class="form-group">
+    <label for="position">Perferred Position</label>
+    <input id="position" class="form-control" [(ngModel)]="newPlayer.position" name="newPlayer.position" type="text">
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>

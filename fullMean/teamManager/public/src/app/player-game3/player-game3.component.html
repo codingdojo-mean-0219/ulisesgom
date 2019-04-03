@@ -1,0 +1,20 @@
+<app-status-nav></app-status-nav>
+
+<table class="table table-light table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players">
+      <td>{{ player.name }}</td>
+      <td> 
+        <button class="btn" [ngClass]="{'btn-success': player.status === 1}" (click)="changeStatus(1, player._id)">playing</button>
+        <button class="btn" [ngClass]="{'btn-danger': player.status === -1}" (click)="changeStatus(-1, player._id)">not playing</button>
+        <button class="btn" [ngClass]="{'btn-warning': player.status === 0}" (click)="changeStatus(0, player._id)">Undecided</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+<app-player-nav></app-player-nav>
+
+<table class="table table-light table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Preferred Position</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players">
+      <td>{{ player.name }}</td>
+      <td>{{ player.position }}</td>
+      <td> 
+        <button class="btn btn-danger" (click)="deletePlayer(player._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
